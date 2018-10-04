@@ -18,4 +18,24 @@ class Adressesoeg:
         response = requests.get(url)
         if self.format == 'json' or self.format == 'geojson':
             response = response.json()
+        else:
+            response = response.text()
+        return response
+
+@dataclass
+class Adresseopslag:
+    id: str
+    srid: str = '25832'
+    format: str = 'json'
+    url: str = f'http://dawa.aws.dk/adresser/'
+    struktur: str = 'mini'
+
+    def info(self):
+        params = urlencode({'struktur': self.struktur, 'srid': self.srid, 'format': self.format})
+        url = self.url + self.id + '?' + params
+        response = requests.get(url)
+        if self.format == 'json' or self.format == 'geojson':
+            response = response.json()
+        else:
+            response = response.text()
         return response

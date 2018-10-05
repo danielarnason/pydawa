@@ -37,15 +37,27 @@ class Adressesoeg:
 
 @dataclass
 class Adresseopslag:
+    """Henter en adresse fra DAR udfra en adresse id.
+
+    :param id: Adressens unikke id.
+    :param srid: 
+    :param struktur: Strukturen af returneret data fra API. Mulige værdier: "nestet", "flad" eller "mini". Det anbefales at benytte mini-formatet hvis der ikke er behov for den fulde struktur, da dette vil give bedre svartider (DEFAULT mini)
+    :param srid: SRID for det koordinatsystem koordinaterne er i (DEFAULT 25832).
+    :param format: Mulige værdier json (DEFAULT), geojson (hvor det giver mening), jsonp, ndjson, csv.
+
+    :returns: En dictionary med svar fra API.
+    :rtype: dictionary
+    """
     id: str
     srid: str = '25832'
     format: str = 'json'
-    url: str = f'http://dawa.aws.dk/adresser/'
     struktur: str = 'mini'
 
     def info(self):
+        """Henter information om adressen fra DAWA API.
+        """
         params = urlencode({'struktur': self.struktur, 'srid': self.srid, 'format': self.format})
-        url = self.url + self.id + '?' + params
+        url = 'http://dawa.aws.dk/adresser/' + self.id + '?' + params
         response = requests.get(url)
         if self.format == 'json' or self.format == 'geojson':
             response = response.json()

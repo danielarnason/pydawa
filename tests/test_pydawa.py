@@ -16,3 +16,10 @@ def test_adresseopslag():
     assert adresse_info['vejnavn'] == 'Mosestien'
     assert adresse_info['husnr'] == '25'
     assert adresse_info['postnr'] == '6430'
+
+def test_adressevasker():
+    adresse = Adressevasker()
+    adresse_info = adresse.info()
+    assert isinstance(adresse_info, dict)
+    assert adresse_info['kategori'] in adresse_info
+    assert isinstance(adresse_info['resultater'], list)

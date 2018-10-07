@@ -1,1 +1,1 @@
-from .dawa import Adressesoeg, Adresseopslag
+from .dawa import Adressesoeg, Adresseopslag, Adressevasker

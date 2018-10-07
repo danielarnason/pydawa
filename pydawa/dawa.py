@@ -8,7 +8,7 @@ class Adressesoeg:
 
         :param vejnavn: Vejnavnet på den søgte adresse.
         :param husnr: Husnummeret på den søgte adresse.
-        :param postnr: Postnummeret på den søgte adresse.
+        :param postnr: Postnummeret på den søgte adresse(DEFAULT None).
         :param struktur: Strukturen af returneret data fra API. Mulige værdier: "nestet", "flad" eller "mini". Det anbefales at benytte mini-formatet hvis der ikke er behov for den fulde struktur, da dette vil give bedre svartider (DEFAULT mini)
         :param srid: SRID for det koordinatsystem koordinaterne er i (DEFAULT 25832).
         :param format: Mulige værdier json (DEFAULT), geojson (hvor det giver mening), jsonp, ndjson, csv.
@@ -18,7 +18,7 @@ class Adressesoeg:
     """
     vejnavn: str
     husnr: str
-    postnr: str
+    postnr: str 
     struktur: str = 'mini'
     srid: str = '25832'
     format: str = 'json'
@@ -26,7 +26,7 @@ class Adressesoeg:
     def info(self):
         """Henter information om adressen fra DAWA API.
         """
-        params = urlencode({'vejnavn': self.vejnavn, 'husnr': self.husnr, 'postnr': self.postnr, 'struktur': self.struktur, 'format': self.format})
+        params = urlencode({'vejnavn': self.vejnavn, 'husnr': self.husnr, 'postnr': self.postnr, 'struktur': self.struktur, 'format': self.format, 'srid': self.srid})
         url = 'http://dawa.aws.dk/adresser?' + params
         response = requests.get(url)
         if self.format == 'json' or self.format == 'geojson':
@@ -64,3 +64,15 @@ class Adresseopslag:
         else:
             response = response.text()
         return response
+
+@dataclass
+class Adressevasker:
+    """Vasker en adresse og kommer med bedste gæt på en rigtig adresse. 
+    """
+    betegnelse: str
+
+    def info(self):
+        params = urlencode({'betegnelse': self.betegnelse})
+        url = 'http://dawa.aws.dk/datavask/adresser?' + params
+        response = requests.get(url)
+        return response.json()

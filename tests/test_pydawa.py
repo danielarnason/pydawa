@@ -1,5 +1,5 @@
 import pytest
-from pydawa import Adressesoeg, Adresseopslag
+from pydawa import Adressesoeg, Adresseopslag, Adressevasker
 
 def test_adressesoeg():
     adresse = Adressesoeg('Rødkildevej', '46', '2400')
@@ -18,8 +18,8 @@ def test_adresseopslag():
     assert adresse_info['postnr'] == '6430'
 
 def test_adressevasker():
-    adresse = Adressevasker()
+    adresse = Adressevasker('Dronning dagmarsvej 200 3650 ølstyke')
     adresse_info = adresse.info()
     assert isinstance(adresse_info, dict)
-    assert adresse_info['kategori'] in adresse_info
+    assert 'kategori' in adresse_info
     assert isinstance(adresse_info['resultater'], list)

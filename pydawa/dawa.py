@@ -40,7 +40,6 @@ class Adresseopslag:
     """Henter en adresse fra DAR udfra en adresse id.
 
     :param id: Adressens unikke id.
-    :param srid: 
     :param struktur: Strukturen af returneret data fra API. Mulige værdier: "nestet", "flad" eller "mini". Det anbefales at benytte mini-formatet hvis der ikke er behov for den fulde struktur, da dette vil give bedre svartider (DEFAULT mini)
     :param srid: SRID for det koordinatsystem koordinaterne er i (DEFAULT 25832).
     :param format: Mulige værdier json (DEFAULT), geojson (hvor det giver mening), jsonp, ndjson, csv.
@@ -68,6 +67,11 @@ class Adresseopslag:
 @dataclass
 class Adressevasker:
     """Vasker en adresse og kommer med bedste gæt på en rigtig adresse. 
+
+    :param betegnelse: Adresse, som skal vaskes
+
+    :returns: En eller flere adresser, som bedst matcher svaret
+    :rtype: dictionary
     """
     betegnelse: str
 

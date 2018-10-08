@@ -1,3 +1,5 @@
 *.swp
 .pytest_cache/
 .vscode
+setup.py
+*egg-info/

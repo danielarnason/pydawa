@@ -4,6 +4,8 @@ En simple API wrapper omkring Danmarks Adressers Web API (DAWA).
 
 Formålet med dette modul er at give nem adgang til DAWA i Python. Grunden til, at jeg begyndte at arbejde på dette modul er, at jeg havde skrevet et par scripts i python, der brugte API'et, men der var ingen "nem" adgang til det. Plus, jeg var nysgerrig over, om jeg kunne skrive et modul og uploade til pypi.
 
+Det her projekt er et "work in progress", så jeg kommer til at tilføje funktionalitet, når jeg har brug for den. Jeg håber, at folk har lyst til at hjælpe med det.
+
 Afhængigheder
 * Requests
 
@@ -12,14 +14,6 @@ Installation
 Installer med pip:
 
 ```$ pip install pydawa```
-
-Installer fra source:
-
-```
-$ git clone https://github.com/danielarnason
-$ cd pydawa
-$ python setup.py install
-```
 
 Brug
 -----

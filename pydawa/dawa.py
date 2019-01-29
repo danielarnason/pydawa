@@ -14,7 +14,10 @@ class Adressesoeg:
         :returns: En dictionary med svar fra API.
         :rtype: dictionary
     """
-    q: str 
+    vejnavn: str = ''
+    husnr: str = ''
+    postnr: str = ''
+    q: str = None
     struktur: str = 'mini'
     srid: str = '25832'
     format: str = 'json'
@@ -22,14 +25,24 @@ class Adressesoeg:
     def info(self):
         """Henter information om adressen fra DAWA API.
         """
-        params = urlencode({'q': self.q, 'struktur': self.struktur, 'format': self.format, 'srid': self.srid})
-        url = 'http://dawa.aws.dk/adresser?' + params
-        response = requests.get(url)
-        if self.format == 'json' or self.format == 'geojson':
-            response = response.json()
+        if self.q == None:
+            params = urlencode({'vejnavn': self.vejnavn, 'husnr': self.husnr, 'postnr': self.postnr, 'struktur': self.struktur, 'format': self.format, 'srid': self.srid})
+            url = 'http://dawa.aws.dk/adresser?' + params
+            response = requests.get(url)
+            if self.format == 'json' or self.format == 'geojson':
+                response = response.json()
+            else:
+                response = response.text()
+            return response
         else:
-            response = response.text()
-        return response
+            params = urlencode({'q': self.q, 'struktur': self.struktur, 'format': self.format, 'srid': self.srid})
+            url = 'http://dawa.aws.dk/adresser?' + params
+            response = requests.get(url)
+            if self.format == 'json' or self.format == 'geojson':
+                response = response.json()
+            else:
+                response = response.text()
+            return response
 
 @dataclass
 class Adresseopslag:

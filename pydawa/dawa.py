@@ -3,7 +3,14 @@ import requests
 from urllib.parse import urlencode
 
 @dataclass
-class Adressesoeg:
+class PyDawa:
+    
+    srid: str = '25832'
+    format: str = 'json'
+    struktur: str = 'mini'
+
+@dataclass
+class Adressesoeg(PyDawa):
     """Søg efter en adresse i DAR.
 
         :param q: Adresse, som skal søges efter.
@@ -14,13 +21,10 @@ class Adressesoeg:
         :returns: En dictionary med svar fra API.
         :rtype: dictionary
     """
+    q: str = None
     vejnavn: str = ''
     husnr: str = ''
     postnr: str = ''
-    q: str = None
-    struktur: str = 'mini'
-    srid: str = '25832'
-    format: str = 'json'
     
     def info(self):
         """Henter information om adressen fra DAWA API.
@@ -45,7 +49,7 @@ class Adressesoeg:
             return response
 
 @dataclass
-class Adresseopslag:
+class Adresseopslag(PyDawa):
     """Henter en adresse fra DAR udfra en adresse id.
 
     :param id: Adressens unikke id.
@@ -56,10 +60,7 @@ class Adresseopslag:
     :returns: En dictionary med svar fra API.
     :rtype: dictionary
     """
-    id: str
-    srid: str = '25832'
-    format: str = 'json'
-    struktur: str = 'mini'
+    id: str = None
 
     def info(self):
         """Henter information om adressen fra DAWA API.
@@ -74,7 +75,7 @@ class Adresseopslag:
         return response
 
 @dataclass
-class Adressevasker:
+class Adressevasker(PyDawa):
     """Vasker en adresse og kommer med bedste gæt på en rigtig adresse. 
 
     :param betegnelse: Adresse, som skal vaskes
@@ -82,7 +83,7 @@ class Adressevasker:
     :returns: En eller flere adresser, som bedst matcher svaret
     :rtype: dictionary
     """
-    betegnelse: str
+    betegnelse: str = None
 
     def info(self):
         params = urlencode({'betegnelse': self.betegnelse})

@@ -9,6 +9,21 @@ class PyDawa:
     format: str = 'json'
     struktur: str = 'mini'
 
+    def koordinater(self, json_response):
+        """Henter koordinater for en given adresse.
+
+        :param json_response: Response fra dawa api. Skal være i json format.
+
+        :returns: En tuple med koordinater.
+        :rtype: tuple
+        """
+        if self.struktur == 'mini':
+            return (json_response['x'], json_response['y'])
+        elif self.struktur == 'flad':
+            return (json_response['vejpunkt_x'], json_response['vejpunkt_y'])
+        elif self.struktur == 'nestet':
+            return (json_response['adgangsadresse']['adgangspunkt']['koordinater'][0], json_response['adgangsadresse']['adgangspunkt']['koordinater'][1])
+
 @dataclass
 class Adressesoeg(PyDawa):
     """Søg efter en adresse i DAR.

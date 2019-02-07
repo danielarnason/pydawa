@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 import requests
-from urllib.parse import urlencode
 
 @dataclass
 class PyDawa:
@@ -45,18 +44,18 @@ class Adressesoeg(PyDawa):
         """Henter information om adressen fra DAWA API.
         """
         if self.q == None:
-            params = urlencode({'vejnavn': self.vejnavn, 'husnr': self.husnr, 'postnr': self.postnr, 'struktur': self.struktur, 'format': self.format, 'srid': self.srid})
-            url = 'http://dawa.aws.dk/adresser?' + params
-            response = requests.get(url)
+            params = {'vejnavn': self.vejnavn, 'husnr': self.husnr, 'postnr': self.postnr, 'struktur': self.struktur, 'format': self.format, 'srid': self.srid}
+            url = 'http://dawa.aws.dk/adresser'
+            response = requests.get(url, params=params)
             if self.format == 'json' or self.format == 'geojson':
                 response = response.json()
             else:
                 response = response.text()
             return response
         else:
-            params = urlencode({'q': self.q, 'struktur': self.struktur, 'format': self.format, 'srid': self.srid})
-            url = 'http://dawa.aws.dk/adresser?' + params
-            response = requests.get(url)
+            params = {'q': self.q, 'struktur': self.struktur, 'format': self.format, 'srid': self.srid}
+            url = 'http://dawa.aws.dk/adresser'
+            response = requests.get(url, params=params)
             if self.format == 'json' or self.format == 'geojson':
                 response = response.json()
             else:
@@ -80,9 +79,9 @@ class Adresseopslag(PyDawa):
     def info(self):
         """Henter information om adressen fra DAWA API.
         """
-        params = urlencode({'struktur': self.struktur, 'srid': self.srid, 'format': self.format})
-        url = 'http://dawa.aws.dk/adresser/' + self.id + '?' + params
-        response = requests.get(url)
+        params = {'struktur': self.struktur, 'srid': self.srid, 'format': self.format}
+        url = 'http://dawa.aws.dk/adresser/' + self.id 
+        response = requests.get(url, params=params)
         if self.format == 'json' or self.format == 'geojson':
             response = response.json()
         else:
@@ -101,7 +100,7 @@ class Adressevasker(PyDawa):
     betegnelse: str = None
 
     def info(self):
-        params = urlencode({'betegnelse': self.betegnelse})
-        url = 'http://dawa.aws.dk/datavask/adresser?' + params
-        response = requests.get(url)
+        params = {'betegnelse': self.betegnelse}
+        url = 'http://dawa.aws.dk/datavask/adresser'
+        response = requests.get(url, params=params)
         return response.json()

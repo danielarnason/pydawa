@@ -30,7 +30,7 @@ Søg efter en adresse med vejnavn, husnr og postnummer.
 ```python
 import pydawa
 
-adresse = pydawa.Adressesoeg(vejnavn='Lærkevej', husnr='1', postnr='2100')
+adresse = pydawa.Adressesoeg(vejnavn='Dronning Dagmars vej', husnr='200', postnr='3650')
 response = adresse.info()
 ```
 `info()` metoden henter data fra dawa api'et og returnerer en dictionary med respons.
@@ -39,7 +39,7 @@ Man kan også søge med en tekststring.
 ```python
 import pydawa
 
-adresse = pydawa.Adressesoeg(q='Lærkevej 1, 2100 København)
+adresse = pydawa.Adressesoeg(q='Dronning Dagmars Vej 200, 3650 Ølstykke')
 response = adresse.info()
 ```
 

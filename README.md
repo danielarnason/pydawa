@@ -63,3 +63,17 @@ import pydawa
 adresse = pydawa.Adressevasker(adressebetegnelse)
 response = adresse.info()
 ```
+
+### Koordinater for adresser
+Man kan hente koordinater for en given adresse ved at bruge _koordinater_ metoden fra _adresse_ variablen i examplerne ovenfor.
+
+```python
+import pydawa
+
+adresse = pydawa.Adresseopslag(id)
+response = adresse.info()
+
+koordinater = adresse.koordinater(response[0])
+```
+Den metode tager et json object. Indtil videre se returner både _Adressesoeg_ og _Adresseopslag_ en liste, så derfor bruger man _response[0]_ som input. 
+Man kan kun hente koordinater fra _Adressesoeg_ og _ Adresseopslag_, fordi _Adressevasker_ returnerer ikke koordinater.

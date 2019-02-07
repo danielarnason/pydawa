@@ -49,7 +49,7 @@ Søg efter en adresse med adressens unikke id.
 ```python
 import pydawa
 
-adresse = pydawa.Adresseopslag(id)
+adresse = pydawa.Adresseopslag(id=id)
 response = adresse.info()
 ```
 `info()` metoden henter data fra dawa api'et og returnerer en dictionary med respons.
@@ -60,7 +60,7 @@ Datavask af adressebetegnelse. Modtager en adressebetegnelse og returnerer en el
 ```python
 import pydawa
 
-adresse = pydawa.Adressevasker(adressebetegnelse)
+adresse = pydawa.Adressevasker(betegnelse=adressebetegnelse)
 response = adresse.info()
 ```
 
@@ -70,7 +70,7 @@ Man kan hente koordinater for en given adresse ved at bruge _koordinater_ metode
 ```python
 import pydawa
 
-adresse = pydawa.Adresseopslag(id)
+adresse = pydawa.Adresseopslag(id=id)
 response = adresse.info()
 
 koordinater = adresse.koordinater(response[0])

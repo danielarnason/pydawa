@@ -33,8 +33,8 @@ class Adressesoeg(PyDawa):
         :param srid: SRID for det koordinatsystem koordinaterne er i (DEFAULT 25832).
         :param format: Mulige værdier json (DEFAULT), geojson (hvor det giver mening), jsonp, ndjson, csv.
 
-        :returns: En dictionary med svar fra API.
-        :rtype: dictionary
+        :returns: En liste med svar fra API.
+        :rtype: list
     """
     q: str = None
     vejnavn: str = ''
@@ -72,8 +72,8 @@ class Adresseopslag(PyDawa):
     :param srid: SRID for det koordinatsystem koordinaterne er i (DEFAULT 25832).
     :param format: Mulige værdier json (DEFAULT), geojson (hvor det giver mening), jsonp, ndjson, csv.
 
-    :returns: En dictionary med svar fra API.
-    :rtype: dictionary
+    :returns: En liste med svar fra API.
+    :rtype: list
     """
     id: str = None
 

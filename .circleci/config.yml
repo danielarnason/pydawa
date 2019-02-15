@@ -1,15 +1,12 @@
 version: 2
 jobs:
   build:
-    working-directory: ~/project
     docker:
       - image: circleci/python:3.7
-        environment:
-          PIPENV_VENV_IN_PROJECT: true
-          steps:
-            - checkout
-            - run:
-                command: |
-                  sudo pip install pipenv
-                  pipenv install
-                  pipenv run pytest
+    steps:
+      - checkout
+      - run:
+          command: |
+          sudo pip install pipenv
+          pipenv install
+          pipenv run pytest

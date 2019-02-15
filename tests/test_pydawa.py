@@ -1,5 +1,5 @@
 import pytest
-from pydawa import Adressesoeg, Adresseopslag, Adressevasker
+from pydawa import Adressesoeg, Adresseopslag, Adressevasker, Reverse
 
 def test_adressesoeg_opslit():
     adresse = Adressesoeg(vejnavn='Rødkildevej', husnr='46', postnr='2400')
@@ -35,7 +35,13 @@ def test_adressevasker():
 def test_get_koordinater():
     adresse = Adressesoeg(q='Rødkildevej 46, 2400 København')
     adresse_info = adresse.info()
-    koordinater = adresse.koordinater(adresse_info[0])
+    koordinater = adresse.get_koordinater(adresse_info[0])
     assert isinstance(koordinater, tuple)
     assert isinstance(koordinater[0], float)
     assert isinstance(koordinater[1], float)
+
+def test_reverse():
+    koordinater = (12.58, 55.68)
+    reverse_geokod = Reverse(koordinater=koordinater).info()
+    assert isinstance(reverse_geokod, dict)
+    assert reverse_geokod['id'] == '0a3f507a-f1ad-32b8-e044-0003ba298018'

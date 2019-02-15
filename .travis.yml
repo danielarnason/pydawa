@@ -1,3 +1,5 @@
+language: python
+python: 3.7
 deploy:
   provider: pypi
   user: danielarnason
@@ -6,4 +8,3 @@ deploy:
   on:
     tags: true
     branch: master
-    python: "3.7"

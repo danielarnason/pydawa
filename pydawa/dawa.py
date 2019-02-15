@@ -115,3 +115,17 @@ class Reverse(PyDawa):
         url = 'http://dawa.aws.dk/adgangsadresser/reverse'
         response = requests.get(url, params=params)
         return response.json()
+
+@dataclass
+class Stednavne():
+
+    kommunekode: int
+    hovedtype: str = None
+    undertype: str = None
+    data_format: str = 'geojson'
+
+    def get_data(self):
+        params = {'kommunekode': self.kommunekode, 'hovedtype': self.hovedtype, 'undertype': self.undertype, 'format': self.data_format}
+        url = 'https://dawa.aws.dk/steder'
+        response = requests.get(url, params=params)
+        return response.json()

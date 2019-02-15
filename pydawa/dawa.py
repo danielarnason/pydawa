@@ -104,3 +104,14 @@ class Adressevasker(PyDawa):
         url = 'http://dawa.aws.dk/datavask/adresser'
         response = requests.get(url, params=params)
         return response.json()
+
+@dataclass
+class Reverse(PyDawa):
+    
+    koordinater: tuple = ()
+
+    def info(self):
+        params = {'x': self.koordinater[0], 'y': self.koordinater[1], 'struktur': self.struktur, 'format': self.format}
+        url = 'http://dawa.aws.dk/adgangsadresser/reverse'
+        response = requests.get(url, params=params)
+        return response.json()

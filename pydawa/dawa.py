@@ -8,7 +8,7 @@ class PyDawa:
     format: str = 'json'
     struktur: str = 'mini'
 
-    def koordinater(self, json_response):
+    def get_koordinater(self, json_response):
         """Henter koordinater for en given adresse.
 
         :param json_response: Response fra dawa api. Skal være i json format.

@@ -107,6 +107,12 @@ class Adressevasker(PyDawa):
 
 @dataclass
 class Reverse(PyDawa):
+    """Returnere den nærmeste adresse til en given koordinat.
+
+    :param koordinater: En tuple med koordinater.
+
+    :returns: Den nærmeste adresse til et givent koordinat.
+    """
     
     koordinater: tuple = ()
 

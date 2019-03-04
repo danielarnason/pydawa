@@ -77,3 +77,15 @@ koordinater = adresse.get_koordinater(response[0])
 ```
 Den metode tager et json object. Indtil videre se returner både _Adressesoeg_ og _Adresseopslag_ en liste, så derfor bruger man _response[0]_ som input. 
 Man kan kun hente koordinater fra _Adressesoeg_ og _ Adresseopslag_, fordi _Adressevasker_ returnerer ikke koordinater.
+
+### Reverse geokodning
+Hvis man har koordinater og gerne vil finde den nærmeste adresse.
+
+```python
+import pydawa
+
+koordinater = (12.18, 55.78)
+
+adresse = pydawa.Reverse(koordinater=koordinater)
+response = adresse.info()
+```

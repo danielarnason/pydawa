@@ -45,7 +45,7 @@ class Adressesoeg(PyDawa):
         """
         if self.q == None:
             params = {'vejnavn': self.vejnavn, 'husnr': self.husnr, 'postnr': self.postnr, 'struktur': self.struktur, 'format': self.format, 'srid': self.srid}
-            url = 'http://dawa.aws.dk/adresser'
+            url = 'http://dawa.aws.dk/adgangsadresser'
             response = requests.get(url, params=params)
             if self.format == 'json' or self.format == 'geojson':
                 response = response.json()
@@ -54,7 +54,7 @@ class Adressesoeg(PyDawa):
             return response
         else:
             params = {'q': self.q, 'struktur': self.struktur, 'format': self.format, 'srid': self.srid}
-            url = 'http://dawa.aws.dk/adresser'
+            url = 'http://dawa.aws.dk/adgangsadresser'
             response = requests.get(url, params=params)
             if self.format == 'json' or self.format == 'geojson':
                 response = response.json()
@@ -80,7 +80,7 @@ class Adresseopslag(PyDawa):
         """Henter information om adressen fra DAWA API.
         """
         params = {'struktur': self.struktur, 'srid': self.srid, 'format': self.format}
-        url = 'http://dawa.aws.dk/adresser/' + self.id 
+        url = 'http://dawa.aws.dk/adgangsadresser/' + self.id 
         response = requests.get(url, params=params)
         if self.format == 'json' or self.format == 'geojson':
             response = response.json()
@@ -101,7 +101,7 @@ class Adressevasker(PyDawa):
 
     def info(self):
         params = {'betegnelse': self.betegnelse}
-        url = 'http://dawa.aws.dk/datavask/adresser'
+        url = 'http://dawa.aws.dk/datavask/adgangsadresser'
         response = requests.get(url, params=params)
         return response.json()
 

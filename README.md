@@ -89,3 +89,22 @@ koordinater = (12.18, 55.78)
 adresse = pydawa.Reverse(koordinater=koordinater)
 response = adresse.info()
 ```
+
+Geokoder
+=========
+Hvis man har en csv eller xlsx fil, som indeholder adresser, som skal geokodes, så kan man bruge den her. Her skal man bare pege på stien til filen, som skal geokodes og angive de kolonner, der indeholder adresse data.
+
+```python
+import pydawa
+
+geokoder = pydawa.Geokoder('c:/users/brugernavn/adresser.csv', cols=['vejnavn', 'husnr', 'postnr', 'bynavn'])
+`
+Man kan vælge om man vil få resultatet gemt i en fil eller bare få det returneret i en pandas dataframe.
+
+```python
+# Som dataframe
+df = geokoder.geokod()
+
+# Som en fil, som bliver gemt i samme folder, som den fil, der bliver gekodet
+geokoder.geokod(save=True)
+`

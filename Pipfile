@@ -7,6 +7,9 @@ name = "pypi"
 requests = "*"
 pytest = "*"
 pylint = "*"
+pandas = "*"
+xlrd = "*"
+openpyxl = "*"
 
 [dev-packages]
 twine = "*"

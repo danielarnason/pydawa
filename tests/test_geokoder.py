@@ -40,24 +40,24 @@ def test_file_not_found():
         geokoder = Geokoder('c:/test.csv', cols=['Adresse'])
 
 def test_geokod_csv_save_false(geokoder_object_csv):
-    df_geokod = geokoder_object_csv.geokod()
+    df_geokod = geokoder_object_csv.geokod_file()
     assert isinstance(df_geokod, pd.DataFrame)
     assert 'x' in df_geokod.columns
     assert 'y' in df_geokod.columns
 
 def test_geokod_csv_save_file(geokoder_object_csv):
-    geokoder_object_csv.geokod(save=True)
+    geokoder_object_csv.geokod_file(save=True)
     saved_file = str(geokoder_object_csv.filepath.parent.joinpath(f'{geokoder_object_csv.filepath.stem}_geokodet{geokoder_object_csv.filepath.suffix}'))
     assert Path(saved_file).exists
 
 def test_geokod_xlsx_save_false(geokoder_object_xlsx):
-    df_geokod = geokoder_object_xlsx.geokod()
+    df_geokod = geokoder_object_xlsx.geokod_file()
     assert isinstance(df_geokod, pd.DataFrame)
     assert 'x' in df_geokod.columns
     assert 'y' in df_geokod.columns
 
 def test_geokod_xlsx_save_file(geokoder_object_xlsx):
-    geokoder_object_xlsx.geokod(save=True)
+    geokoder_object_xlsx.geokod_file(save=True)
     saved_file = str(geokoder_object_xlsx.filepath.parent.joinpath(f'{geokoder_object_xlsx.filepath.stem}_geokodet{geokoder_object_xlsx.filepath.suffix}'))
     assert Path(saved_file).exists
 

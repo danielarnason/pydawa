@@ -15,8 +15,9 @@ class Geokoder:
     cols: None = None
 
     def __post_init__(self):
-        self.filepath = Path(self.filepath)
-        self.extension = self.filepath.suffix
+        if type(self.filepath) == str:
+            self.filepath = Path(self.filepath)
+            self.extension = self.filepath.suffix
 
     def progbar(self, curr, total, full_progbar):
         frac = curr / total
@@ -51,10 +52,10 @@ class Geokoder:
 
     def geokod_file(self, save=False):
 
-        if not self.filepath.exists():
-            raise FileNotFoundError(f'{self.filepath} findes ikke!')
-        elif self.filepath == None:
+        if self.filepath == None:
             raise Exception(f'filepath ikke defineret!')
+        elif not self.filepath.exists():
+            raise FileNotFoundError(f'{self.filepath} findes ikke!')
 
         if self.extension == '.csv':
             sep = self.find_csv_sep()

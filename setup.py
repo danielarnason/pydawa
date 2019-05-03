@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='pydawa',
-    version='0.4.3',
+    version='0.4.4',
     packages=find_packages(),
     license='MIT',
     description='API wrapper til DAWA',

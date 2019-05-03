@@ -11,13 +11,11 @@ class Geokoder:
     Parameters:
         filepath (str): Placeringen af filen.
     """
-    filepath: str
+    filepath: str = None
     cols: None = None
 
     def __post_init__(self):
         self.filepath = Path(self.filepath)
-        if not self.filepath.exists():
-            raise FileNotFoundError(f'{self.filepath} findes ikke!')
         self.extension = self.filepath.suffix
 
     def progbar(self, curr, total, full_progbar):
@@ -52,6 +50,11 @@ class Geokoder:
         return dataframe
 
     def geokod_file(self, save=False):
+
+        if not self.filepath.exists():
+            raise FileNotFoundError(f'{self.filepath} findes ikke!')
+        elif self.filepath == None:
+            raise Exception(f'filepath ikke defineret!')
 
         if self.extension == '.csv':
             sep = self.find_csv_sep()

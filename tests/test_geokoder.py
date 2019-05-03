@@ -27,17 +27,17 @@ def xlsx_file(dataframe, tmpdir_factory):
 
 @pytest.fixture(scope='session')
 def geokoder_object_csv(csv_file):
-    geokoder = Geokoder(csv_file, cols=['Adresse'])
+    geokoder = Geokoder(csv_file)
     return geokoder
 
 @pytest.fixture(scope='session')
 def geokoder_object_xlsx(xlsx_file):
-    geokoder = Geokoder(xlsx_file, cols=['Adresse'])
+    geokoder = Geokoder(xlsx_file)
     return geokoder
 
 def test_file_not_found():
     with pytest.raises(FileNotFoundError):
-        geokoder = Geokoder('c:/test.csv', cols=['Adresse'])
+        geokoder = Geokoder('c:/test.csv')
         geokoder.geokod_file()
 
 def test_file_not_defined():
@@ -46,24 +46,24 @@ def test_file_not_defined():
         geokoder.geokod_file()
 
 def test_geokod_csv_save_false(geokoder_object_csv):
-    df_geokod = geokoder_object_csv.geokod_file()
+    df_geokod = geokoder_object_csv.geokod_file(cols=['Adresse'])
     assert isinstance(df_geokod, pd.DataFrame)
     assert 'x' in df_geokod.columns
     assert 'y' in df_geokod.columns
 
 def test_geokod_csv_save_file(geokoder_object_csv):
-    geokoder_object_csv.geokod_file(save=True)
+    geokoder_object_csv.geokod_file(save=True, cols=['Adresse'])
     saved_file = str(geokoder_object_csv.filepath.parent.joinpath(f'{geokoder_object_csv.filepath.stem}_geokodet{geokoder_object_csv.filepath.suffix}'))
     assert Path(saved_file).exists
 
 def test_geokod_xlsx_save_false(geokoder_object_xlsx):
-    df_geokod = geokoder_object_xlsx.geokod_file()
+    df_geokod = geokoder_object_xlsx.geokod_file(cols=['Adresse'])
     assert isinstance(df_geokod, pd.DataFrame)
     assert 'x' in df_geokod.columns
     assert 'y' in df_geokod.columns
 
 def test_geokod_xlsx_save_file(geokoder_object_xlsx):
-    geokoder_object_xlsx.geokod_file(save=True)
+    geokoder_object_xlsx.geokod_file(save=True, cols=['Adresse'])
     saved_file = str(geokoder_object_xlsx.filepath.parent.joinpath(f'{geokoder_object_xlsx.filepath.stem}_geokodet{geokoder_object_xlsx.filepath.suffix}'))
     assert Path(saved_file).exists
 

@@ -12,7 +12,6 @@ class Geokoder:
         filepath (str): Placeringen af filen.
     """
     filepath: str = None
-    cols: None = None
 
     def __post_init__(self):
         if type(self.filepath) == str:
@@ -24,10 +23,10 @@ class Geokoder:
         filled_progbar = round(frac * full_progbar)
         print('\r', '#' * filled_progbar + '-' * (full_progbar - filled_progbar), f'[{frac:>7.2%}]', end='')
 
-    def geocode_df(self, dataframe):
+    def geocode_df(self, dataframe, cols):
         total_len = len(dataframe.index)
         for index, row in dataframe.iterrows():
-            search_string = ' '.join([str(row[col]) for col in self.cols])
+            search_string = ' '.join([str(row[col]) for col in cols])
             adresse = Adressesoeg(q=search_string)
             adresse_data = adresse.info()
             if len(adresse_data) > 0:
@@ -50,7 +49,7 @@ class Geokoder:
             self.progbar(index + 1, total_len, 100)
         return dataframe
 
-    def geokod_file(self, save=False):
+    def geokod_file(self, save=False, cols=None):
 
         if self.filepath == None:
             raise Exception(f'filepath ikke defineret!')
@@ -60,7 +59,7 @@ class Geokoder:
         if self.extension == '.csv':
             sep = self.find_csv_sep()
             df = pd.read_csv(self.filepath, sep=sep)
-            df_geokod = self.geocode_df(df)
+            df_geokod = self.geocode_df(df, cols)
             if save == True:
                 df_geokod.to_csv(str(self.filepath.parent.joinpath(f'{self.filepath.stem}_geokodet{self.filepath.suffix}')))
             else:
@@ -68,7 +67,7 @@ class Geokoder:
 
         elif self.extension =='.xlsx':
             df = pd.read_excel(self.filepath)
-            df_geokod = self.geocode_df(df)
+            df_geokod = self.geocode_df(df, cols)
             if save == True:
                 df_geokod.to_excel(str(self.filepath.parent.joinpath(f'{self.filepath.stem}_geokodet{self.filepath.suffix}')))
             else:

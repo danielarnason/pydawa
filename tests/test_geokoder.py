@@ -38,6 +38,12 @@ def geokoder_object_xlsx(xlsx_file):
 def test_file_not_found():
     with pytest.raises(FileNotFoundError):
         geokoder = Geokoder('c:/test.csv', cols=['Adresse'])
+        geokoder.geokod_file()
+
+def test_file_not_defined():
+    with pytest.raises(Exception):
+        geokoder = Geokoder()
+        geokoder.geokod_file()
 
 def test_geokod_csv_save_false(geokoder_object_csv):
     df_geokod = geokoder_object_csv.geokod_file()

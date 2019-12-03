@@ -12,6 +12,7 @@ class Geokoder:
         filepath (str): Placeringen af filen.
     """
     filepath: str = None
+    encoding: str = None
 
     def __post_init__(self):
         if type(self.filepath) == str:
@@ -58,7 +59,7 @@ class Geokoder:
 
         if self.extension == '.csv':
             sep = self.find_csv_sep()
-            df = pd.read_csv(self.filepath, sep=sep)
+            df = pd.read_csv(self.filepath, sep=sep, encoding=self.encoding)
             df_geokod = self.geocode_df(df, cols)
             if save == True:
                 df_geokod.to_csv(str(self.filepath.parent.joinpath(f'{self.filepath.stem}_geokodet{self.filepath.suffix}')))

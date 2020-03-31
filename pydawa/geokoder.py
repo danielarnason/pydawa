@@ -31,8 +31,8 @@ class Geokoder:
             adresse_data = adresse.info()
             if len(adresse_data) > 0:
                 koordinat = adresse.get_koordinater(adresse_data[0])
-                dataframe.set_value(index, 'x', koordinat[0])
-                dataframe.set_value(index, 'y', koordinat[1])
+                dataframe.at[index, 'x'] = koordinat[0]
+                dataframe.at[index, 'y'] = koordinat[1]
             else:
                 adresse_vask = Adressevasker(betegnelse=search_string)
                 response_vask = adresse_vask.info()
@@ -41,11 +41,11 @@ class Geokoder:
                 rigtig_adresse_data = rigtig_adresse.info()
                 try:
                     koordinat = rigtig_adresse.get_koordinater(rigtig_adresse_data)
-                    dataframe.set_value(index, 'x', koordinat[0])
-                    dataframe.set_value(index, 'y', koordinat[1])
+                    dataframe.at[index, 'x'] = koordinat[0]
+                    dataframe.at[index, 'y'] = koordinat[1]
                 except:
-                    dataframe.set_value(index, 'x', 'NaN')
-                    dataframe.set_value(index, 'y', 'NaN')
+                    dataframe.at[index, 'x'] = 'NaN'
+                    dataframe.at[index, 'y'] = 'NaN'
             self.progbar(index + 1, total_len, 100)
         return dataframe
 

@@ -3,9 +3,9 @@ name = "pydawa"
 version = "0.5.0"
 description = "En API wrapper omkring Danmarks Adressers Web API"
 authors = ["Daníel Örn Árnason <danielarnason85@gmail.com>"]
-license = GPL-3.0-or-later
-readme = README.md
-url = https://github.com/danielarnason/pydawa.git
+license = "GPL-3.0-or-later"
+readme = "README.md"
+repository = "https://github.com/danielarnason/pydawa.git"
 
 [tool.poetry.dependencies]
 python = "^3.8"

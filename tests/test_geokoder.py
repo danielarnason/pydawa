@@ -52,9 +52,11 @@ def test_geokod_csv_save_false(geokoder_object_csv):
     assert 'y' in df_geokod.columns
 
 def test_geokod_csv_save_file(geokoder_object_csv):
+    geokoder_object_csv.encoding = 'utf-8'
     geokoder_object_csv.geokod_file(save=True, cols=['Adresse'])
     saved_file = str(geokoder_object_csv.filepath.parent.joinpath(f'{geokoder_object_csv.filepath.stem}_geokodet{geokoder_object_csv.filepath.suffix}'))
     assert Path(saved_file).exists
+    assert geokoder_object_csv.encoding == 'utf-8'
 
 def test_geokod_xlsx_save_false(geokoder_object_xlsx):
     df_geokod = geokoder_object_xlsx.geokod_file(cols=['Adresse'])
